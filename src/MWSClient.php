@@ -99,7 +99,42 @@ class MWSClient{
         }
     }
     
-   /**
+    /**
+     * Deletes the subscription for the specified notification type and destination.
+     * @link https://docs.developer.amazonservices.com/en_US/subscriptions/Subscriptions_DeleteSubscription.html
+     * @param $queueUrl
+     * @param $notificationType
+     * @return array|string
+     */
+    public function DeleteSubscription($queueUrl, $notificationType)
+    {
+        return $this->request('DeleteSubscription', [
+            'Destination.AttributeList.member.1.Key' => 'sqsQueueUrl',
+            'Destination.AttributeList.member.1.Value' => $queueUrl,
+            'Destination.DeliveryChannel' => 'SQS',
+            'NotificationType' => $notificationType
+        ]);
+    }
+
+    /**
+     * Creates a new subscription for the specified notification type and destination.
+     * @link https://docs.developer.amazonservices.com/en_US/subscriptions/Subscriptions_CreateSubscription.html
+     * @param $queueUrl
+     * @param $notificationType
+     * @return array|string
+     */
+    public function CreateSubscription($queueUrl, $notificationType)
+    {
+        return $this->request('CreateSubscription', [
+            'Subscription.Destination.DeliveryChannel' => 'SQS',
+            'Subscription.Destination.AttributeList.member.1.Key' => 'sqsQueueUrl',
+            'Subscription.Destination.AttributeList.member.1.Value' => $queueUrl,
+            'Subscription.IsEnabled' => true,
+            'Subscription.NotificationType' => $notificationType
+        ]);
+    }
+
+    /**
      * Specifies a new destination where you want to receive notifications.
      * @link https://docs.developer.amazonservices.com/en_US/subscriptions/Subscriptions_RegisterDestination.html
      * @param $queueUrl
