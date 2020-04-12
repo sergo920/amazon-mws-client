@@ -98,6 +98,21 @@ class MWSClient{
             return true;
         }
     }
+    
+   /**
+     * Specifies a new destination where you want to receive notifications.
+     * @link https://docs.developer.amazonservices.com/en_US/subscriptions/Subscriptions_RegisterDestination.html
+     * @param $queueUrl
+     * @return array|string
+     */
+    public function RegisterDestination($queueUrl)
+    {
+        return $this->request('RegisterDestination', [
+            'Destination.DeliveryChannel' => 'SQS',
+            'Destination.AttributeList.member.1.Key' => 'sqsQueueUrl',
+            'Destination.AttributeList.member.1.Value' => $queueUrl
+        ]);
+    }
 
     /**
      * Returns the current competitive price of a product, based on ASIN.
