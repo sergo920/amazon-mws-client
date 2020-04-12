@@ -112,7 +112,8 @@ class MWSClient{
             'Destination.AttributeList.member.1.Key' => 'sqsQueueUrl',
             'Destination.AttributeList.member.1.Value' => $queueUrl,
             'Destination.DeliveryChannel' => 'SQS',
-            'NotificationType' => $notificationType
+            'NotificationType' => $notificationType,
+            'MarketplaceId' => $this->config['Marketplace_Id']
         ]);
     }
 
@@ -130,7 +131,8 @@ class MWSClient{
             'Subscription.Destination.AttributeList.member.1.Key' => 'sqsQueueUrl',
             'Subscription.Destination.AttributeList.member.1.Value' => $queueUrl,
             'Subscription.IsEnabled' => true,
-            'Subscription.NotificationType' => $notificationType
+            'Subscription.NotificationType' => $notificationType,
+            'MarketplaceId' => $this->config['Marketplace_Id']
         ]);
     }
 
@@ -145,7 +147,8 @@ class MWSClient{
         return $this->request('RegisterDestination', [
             'Destination.DeliveryChannel' => 'SQS',
             'Destination.AttributeList.member.1.Key' => 'sqsQueueUrl',
-            'Destination.AttributeList.member.1.Value' => $queueUrl
+            'Destination.AttributeList.member.1.Value' => $queueUrl,
+            'MarketplaceId' => $this->config['Marketplace_Id']
         ]);
     }
 
@@ -1295,6 +1298,7 @@ class MWSClient{
                     true
                 )
             );
+
             $requestOptions['query'] = $query;
 
             if ($this->client === null) {
