@@ -516,17 +516,26 @@ class MWSClient{
             return [];
         }
     }
+
     /**
-     * Returns an order based on the AmazonOrderId values that you specify.
-     * @param string $AmazonOrderId
+     * Returns orders based on the AmazonOrderId values that you specify.
+     * Maximum: 50 order ids
+     * @link https://docs.developer.amazonservices.com/en_US/orders-2013-09-01/Orders_GetOrder.html
+     * @param string|array $AmazonOrderId
      * @return array if the order is found, false if not
      */
     public function GetOrder($AmazonOrderId)
     {
-        $response = $this->request('GetOrder', [
-            'AmazonOrderId.Id.1' => $AmazonOrderId
-        ]);
+        if (!is_array($AmazonOrderId)) {
+            $AmazonOrderId = [$AmazonOrderId];
+        }
 
+        $query = [];
+        foreach ($AmazonOrderId as $index => $value) {
+            $query['AmazonOrderId.Id.'.($index + 1)] = $value;
+        }
+
+        $response = $this->request('GetOrder', $query);
         if (isset($response['GetOrderResult']['Orders']['Order'])) {
             return $response['GetOrderResult']['Orders']['Order'];
         } else {
