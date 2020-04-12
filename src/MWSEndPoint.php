@@ -8,9 +8,25 @@ class MWSEndPoint
 {
     const FINANCES_API_PATH = '/Finances/2015-05-01';
 
+    const SUBSCRIPTIONS_API_PATH = '/Subscriptions/2013-07-01';
+
     const REPORTS_API_PATH = '/Reports/2009-01-01';
 
     public static $endpoints = [
+        /** Subscriptions API section */
+        'RegisterDestination' => [
+            'method' => 'POST',
+            'action' => 'RegisterDestination',
+            'path' => self::SUBSCRIPTIONS_API_PATH,
+            'date' => '2013-07-01'
+        ],
+        'CreateSubscription' => [
+            'method' => 'POST',
+            'action' => 'CreateSubscription',
+            'path' => self::SUBSCRIPTIONS_API_PATH,
+            'date' => '2013-07-01'
+        ],
+        /** end Subscriptions API section */
         'ListRecommendations' => [
             'method' => 'POST',
             'action' => 'ListRecommendations',
