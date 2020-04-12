@@ -1,5 +1,5 @@
 {
-    "name": "mcs/amazon-mws",
+    "name": "sergo920/amazon-mws-client",
     "description": "Library to interface with Amazon MWS",
     "license": "MIT",
     "keywords": ["amazon", "mws"],
