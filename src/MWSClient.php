@@ -127,22 +127,14 @@ class MWSClient{
      */
     public function CreateSubscription($queueUrl, $notificationType)
     {
-        try {
-            return $this->request('CreateSubscription', [
-                'Subscription.Destination.DeliveryChannel' => 'SQS',
-                'Subscription.Destination.AttributeList.member.1.Key' => 'sqsQueueUrl',
-                'Subscription.Destination.AttributeList.member.1.Value' => $queueUrl,
-                'Subscription.IsEnabled' => true,
-                'Subscription.NotificationType' => $notificationType,
-                'MarketplaceId' => $this->config['Marketplace_Id']
-            ]);
-        } catch (\Exception $e) {
-            if (strpos($e->getMessage(), 'already exist') !== false) {
-                return true;
-            }
-            throw $e;
-        }
-
+        return $this->request('CreateSubscription', [
+            'Subscription.Destination.DeliveryChannel' => 'SQS',
+            'Subscription.Destination.AttributeList.member.1.Key' => 'sqsQueueUrl',
+            'Subscription.Destination.AttributeList.member.1.Value' => $queueUrl,
+            'Subscription.IsEnabled' => true,
+            'Subscription.NotificationType' => $notificationType,
+            'MarketplaceId' => $this->config['Marketplace_Id']
+        ]);
     }
 
     /**
@@ -154,19 +146,12 @@ class MWSClient{
      */
     public function RegisterDestination($queueUrl)
     {
-        try {
-            return $this->request('RegisterDestination', [
-                'Destination.DeliveryChannel' => 'SQS',
-                'Destination.AttributeList.member.1.Key' => 'sqsQueueUrl',
-                'Destination.AttributeList.member.1.Value' => $queueUrl,
-                'MarketplaceId' => $this->config['Marketplace_Id']
-            ]);
-        } catch (\Exception $e) {
-            if (strpos($e->getMessage(), 'already been registered') !== false) {
-                return true;
-            }
-            throw $e;
-        }
+        return $this->request('RegisterDestination', [
+            'Destination.DeliveryChannel' => 'SQS',
+            'Destination.AttributeList.member.1.Key' => 'sqsQueueUrl',
+            'Destination.AttributeList.member.1.Value' => $queueUrl,
+            'MarketplaceId' => $this->config['Marketplace_Id']
+        ]);
     }
 
     /**
