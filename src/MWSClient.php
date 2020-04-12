@@ -123,17 +123,26 @@ class MWSClient{
      * @param $queueUrl
      * @param $notificationType
      * @return array|string
+     * @throws \Exception
      */
     public function CreateSubscription($queueUrl, $notificationType)
     {
-        return $this->request('CreateSubscription', [
-            'Subscription.Destination.DeliveryChannel' => 'SQS',
-            'Subscription.Destination.AttributeList.member.1.Key' => 'sqsQueueUrl',
-            'Subscription.Destination.AttributeList.member.1.Value' => $queueUrl,
-            'Subscription.IsEnabled' => true,
-            'Subscription.NotificationType' => $notificationType,
-            'MarketplaceId' => $this->config['Marketplace_Id']
-        ]);
+        try {
+            return $this->request('CreateSubscription', [
+                'Subscription.Destination.DeliveryChannel' => 'SQS',
+                'Subscription.Destination.AttributeList.member.1.Key' => 'sqsQueueUrl',
+                'Subscription.Destination.AttributeList.member.1.Value' => $queueUrl,
+                'Subscription.IsEnabled' => true,
+                'Subscription.NotificationType' => $notificationType,
+                'MarketplaceId' => $this->config['Marketplace_Id']
+            ]);
+        } catch (\Exception $e) {
+            if (strpos($e->getMessage(), 'already exist') !== false) {
+                return true;
+            }
+            throw $e;
+        }
+
     }
 
     /**
@@ -141,21 +150,30 @@ class MWSClient{
      * @link https://docs.developer.amazonservices.com/en_US/subscriptions/Subscriptions_RegisterDestination.html
      * @param $queueUrl
      * @return array|string
+     * @throws \Exception
      */
     public function RegisterDestination($queueUrl)
     {
-        return $this->request('RegisterDestination', [
-            'Destination.DeliveryChannel' => 'SQS',
-            'Destination.AttributeList.member.1.Key' => 'sqsQueueUrl',
-            'Destination.AttributeList.member.1.Value' => $queueUrl,
-            'MarketplaceId' => $this->config['Marketplace_Id']
-        ]);
+        try {
+            return $this->request('RegisterDestination', [
+                'Destination.DeliveryChannel' => 'SQS',
+                'Destination.AttributeList.member.1.Key' => 'sqsQueueUrl',
+                'Destination.AttributeList.member.1.Value' => $queueUrl,
+                'MarketplaceId' => $this->config['Marketplace_Id']
+            ]);
+        } catch (\Exception $e) {
+            if (strpos($e->getMessage(), 'already been registered') !== false) {
+                return true;
+            }
+            throw $e;
+        }
     }
 
     /**
      * Returns the current competitive price of a product, based on ASIN.
      * @param array [$asin_array = []]
      * @return array
+     * @throws \Throwable
      */
     public function GetCompetitivePricingForASIN($asin_array = [])
     {
