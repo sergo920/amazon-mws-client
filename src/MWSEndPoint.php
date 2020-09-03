@@ -20,6 +20,12 @@ class MWSEndPoint
             'path' => self::SUBSCRIPTIONS_API_PATH,
             'date' => '2013-07-01'
         ],
+        'DeregisterDestination' => [
+            'method' => 'POST',
+            'action' => 'DeregisterDestination',
+            'path' => self::SUBSCRIPTIONS_API_PATH,
+            'date' => '2013-07-01'
+        ],
         'DeleteSubscription' => [
             'method' => 'POST',
             'action' => 'DeleteSubscription',
