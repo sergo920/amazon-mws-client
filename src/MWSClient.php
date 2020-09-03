@@ -136,6 +136,23 @@ class MWSClient{
             'MarketplaceId' => $this->config['Marketplace_Id']
         ]);
     }
+    
+    /**
+     * Specifies a new destination where you want to receive notifications.
+     * @link https://docs.developer.amazonservices.com/en_UK/subscriptions/Subscriptions_DeregisterDestination.html
+     * @param $queueUrl
+     * @return array|string
+     * @throws \Exception
+     */
+    public function DeregisterDestination($queueUrl)
+    {
+        return $this->request('DeregisterDestination', [
+            'Destination.DeliveryChannel' => 'SQS',
+            'Destination.AttributeList.member.1.Key' => 'sqsQueueUrl',
+            'Destination.AttributeList.member.1.Value' => $queueUrl,
+            'MarketplaceId' => $this->config['Marketplace_Id']
+        ]);
+    }
 
     /**
      * Specifies a new destination where you want to receive notifications.
