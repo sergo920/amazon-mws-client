@@ -1363,6 +1363,7 @@ class MWSClient{
             // check token exception
             $msg = strtolower($message);
             if (
+                strpos($msg, 'missing required mwsauthtoken') !== false ||
                 strpos($msg, 'invalid seller id') !== false ||
                 strpos($msg, 'token is not valid') !== false ||
                 strpos($msg, 'aws access key id you provided does not exist') !== false ||
