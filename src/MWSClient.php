@@ -174,11 +174,10 @@ class MWSClient{
    /**
      * Specifies a new destination where you want to receive notifications.
      * @link https://docs.developer.amazonservices.com/en_US/subscriptions/Subscriptions_RegisterDestination.html
-     * @param $queueUrl
      * @return array|string
      * @throws \Exception
      */
-    public function GetDestinations($queueUrl)
+    public function GetDestinations()
     {
         return $this->request('GetDestinations', ['MarketplaceId' => $this->config['Marketplace_Id']]);
     } 
