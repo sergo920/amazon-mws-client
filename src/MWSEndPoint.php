@@ -26,7 +26,7 @@ class MWSEndPoint
             'path' => self::SUBSCRIPTIONS_API_PATH,
             'date' => '2013-07-01'
         ],
-        'GetDestinations' => [
+        'ListRegisteredDestinations' => [
             'method' => 'POST',
             'action' => 'ListRegisteredDestinations',
             'path' => self::SUBSCRIPTIONS_API_PATH,
