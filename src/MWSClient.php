@@ -177,7 +177,7 @@ class MWSClient{
      * @return array|string
      * @throws \Exception
      */
-    public function GetSubscriptions()
+    public function ListSubscriptions()
     {
         return $this->request('ListSubscriptions', ['MarketplaceId' => $this->config['Marketplace_Id']]);
     } 
