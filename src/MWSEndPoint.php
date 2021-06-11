@@ -22,7 +22,7 @@ class MWSEndPoint
         ],
         'GetDestinations' => [
             'method' => 'POST',
-            'action' => 'GetDestinations',
+            'action' => 'ListRegisteredDestinations',
             'path' => self::SUBSCRIPTIONS_API_PATH,
             'date' => '2013-07-01'
         ],
