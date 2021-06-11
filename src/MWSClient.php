@@ -188,9 +188,9 @@ class MWSClient{
      * @return array|string
      * @throws \Exception
      */
-    public function GetDestinations()
+    public function ListRegisteredDestinations()
     {
-        return $this->request('GetDestinations', ['MarketplaceId' => $this->config['Marketplace_Id']]);
+        return $this->request('ListRegisteredDestinations', ['MarketplaceId' => $this->config['Marketplace_Id']]);
     } 
 
     /**
