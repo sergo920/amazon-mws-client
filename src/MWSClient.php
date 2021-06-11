@@ -170,6 +170,18 @@ class MWSClient{
             'MarketplaceId' => $this->config['Marketplace_Id']
         ]);
     }
+    
+   /**
+     * Specifies a new destination where you want to receive notifications.
+     * @link https://docs.developer.amazonservices.com/en_US/subscriptions/Subscriptions_RegisterDestination.html
+     * @param $queueUrl
+     * @return array|string
+     * @throws \Exception
+     */
+    public function GetDestinations($queueUrl)
+    {
+        return $this->request('GetDestinations', ['MarketplaceId' => $this->config['Marketplace_Id']]);
+    } 
 
     /**
      * Returns the current competitive price of a product, based on ASIN.
