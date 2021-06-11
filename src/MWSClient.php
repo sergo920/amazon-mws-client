@@ -171,6 +171,17 @@ class MWSClient{
         ]);
     }
     
+    /**
+     * Specifies a new destination where you want to receive notifications.
+     * @link https://docs.developer.amazonservices.com/en_US/subscriptions/Subscriptions_RegisterDestination.html
+     * @return array|string
+     * @throws \Exception
+     */
+    public function GetSubscriptions()
+    {
+        return $this->request('ListSubscriptions', ['MarketplaceId' => $this->config['Marketplace_Id']]);
+    } 
+    
    /**
      * Specifies a new destination where you want to receive notifications.
      * @link https://docs.developer.amazonservices.com/en_US/subscriptions/Subscriptions_RegisterDestination.html
